@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
+
+.jost-light-300 {
+	font-family: 'Jost', sans-serif;
+	font-optical-sizing: auto;
+	font-weight: 300;
+	font-style: normal;
+}
+
+.scene-change-fade-in {
+	animation-name: fade-in;
+	animation-duration: 1s;
+}
+
+.scene-change-fade-out {
+	animation-name: fade-out;
+	animation-duration: 1s;
+}
+
+@keyframes fade-in {
+	0% {
+		opacity: 0;
+	}
+	50% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+@keyframes fade-out {
+	0% {
+		opacity: 0;
+	}
+	50% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+:root {
+	--card-bg-color: rgba(255, 255, 255, 0.1);
+}
+
+body {
+	display: block;
+	background-color: black;
+	overflow: auto;
+	color: white;
+}
