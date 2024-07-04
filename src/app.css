@@ -17,6 +17,15 @@
 	animation-duration: 1s;
 }
 
+@keyframes blink {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
 @keyframes fade-in {
 	0% {
 		opacity: 0;
@@ -45,9 +54,28 @@
 	--card-bg-color: rgba(255, 255, 255, 0.1);
 }
 
+html::-webkit-scrollbar {
+	width: 8px;
+}
+
+html::-webkit-scrollbar-track {
+	border-radius: 8px;
+	background-color: rgba(0, 0, 0, 0);
+	border: 0;
+}
+
+html::-webkit-scrollbar-thumb {
+	border-radius: 8px;
+	background-color: rgba(255, 255, 255, 0.1);
+}
+
 body {
 	display: block;
 	background-color: black;
 	overflow: auto;
 	color: white;
+}
+
+body p {
+	font-size: 1rem;
 }

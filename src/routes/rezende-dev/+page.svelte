@@ -10,7 +10,10 @@
 		const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 1000);
 
 		const renderer = new THREE.WebGLRenderer({ antialias: true });
-		renderer.setSize(window.innerWidth, window.innerHeight);
+		let offsetFactor = 0.05;
+		let offsetX = window.innerWidth * offsetFactor;
+		let offsetY = window.innerHeight * offsetFactor;
+		renderer.setSize(window.innerWidth - offsetX, window.innerHeight - offsetY);
 		let child = div.appendChild(renderer.domElement);
 		child.id = 'renderer';
 
@@ -38,6 +41,9 @@
 	#canvasDiv {
 		margin: 0;
 		padding: 0;
+		display: flex;
+		justify-content: center;
+		align-items: center;
 	}
 
 	#renderer {
