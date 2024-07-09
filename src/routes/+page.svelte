@@ -16,7 +16,7 @@
 		}
 	];
 
-	let focused = true;
+	let focused = false;
 
 	let typing = {
 		updatedText: '',
@@ -28,10 +28,6 @@
 	let shouldDisplayCards = false;
 
 	let currentHover = -1;
-
-	setTimeout(() => {
-		focused = false;
-	}, 100);
 
 	function startHub() {
 		focused = true;
@@ -60,15 +56,16 @@
 	function playClickSound() {
 		helpers.AudioHelper.playAudio('/audio_click.ogg', 0.5);
 	}
-
-	let div;
 </script>
 
 <div style="display: flex; flex-direction: column; height: 100%; text-align: center;  ">
-	<div bind:this={div} id="canvasDiv" class="scene-change-fade-in"></div>
+	<div class="fog-background">
+		<div class="infinite-fog" style="animation-duration: 5s; opacity: 0.05;" />
+		<div class="infinite-fog" />
+	</div>
+
 	{#if focused == false}
 		<button
-			in:fade={{ easing: linear, delay: 0, duration: 1500 }}
 			on:click={() => startHub()}
 			class="base-border base-hover hub-focus-button jost-light-300"
 			>Start your journey on wiseshepherdgames.net!
@@ -120,6 +117,23 @@
 </div>
 
 <style>
+	.fog-background {
+		position: fixed;
+		min-width: 100%;
+		min-height: 100%;
+		animation: fade-in 2s ease-in;
+	}
+
+	.infinite-fog {
+		position: fixed;
+		bottom: 0;
+		min-width: 5760px;
+		min-height: 512px;
+		background: url('/fog_00.png') repeat-x;
+		animation: slide 20s linear infinite;
+		opacity: 0.08;
+	}
+
 	.hub {
 		position: relative;
 		display: flex;
@@ -139,6 +153,7 @@
 		transform: translateY(35vh);
 		opacity: 0.5;
 		border-image-slice: 96;
+		animation: fade-in 3s ease-in;
 	}
 
 	.hub-card-container {

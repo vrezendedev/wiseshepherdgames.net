@@ -9,12 +9,12 @@
 
 .scene-change-fade-in {
 	animation-name: fade-in;
-	animation-duration: 1s;
+	animation-duration: 2s;
 }
 
 .scene-change-fade-out {
 	animation-name: fade-out;
-	animation-duration: 1s;
+	animation-duration: 2s;
 }
 
 @keyframes blink {
@@ -26,13 +26,20 @@
 	}
 }
 
+@keyframes slide {
+	0% {
+		transform: translate3d(0, 0, 0);
+	}
+	100% {
+		transform: translate3d(-1024px, 0, 0);
+	}
+}
+
 @keyframes fade-in {
 	0% {
 		opacity: 0;
 	}
-	50% {
-		opacity: 0;
-	}
+
 	100% {
 		opacity: 1;
 	}
@@ -42,9 +49,7 @@
 	0% {
 		opacity: 0;
 	}
-	50% {
-		opacity: 0;
-	}
+
 	100% {
 		opacity: 1;
 	}
