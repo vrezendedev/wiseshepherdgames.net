@@ -65,11 +65,13 @@
 	</div>
 
 	{#if focused == false}
-		<button
-			on:click={() => startHub()}
-			class="base-border base-hover hub-focus-button jost-light-300"
-			>Start your journey on wiseshepherdgames.net!
-		</button>
+		<div style="animation: fade-in 3s ease-in;">
+			<button
+				on:click={() => startHub()}
+				class="base-border base-hover hub-focus-button jost-light-300"
+				>Start your journey on wiseshepherdgames.net!
+			</button>
+		</div>
 	{/if}
 
 	<h1 style="animation-name: fade-in; animation-duration: 2s;">
@@ -121,7 +123,7 @@
 		position: fixed;
 		min-width: 100%;
 		min-height: 100%;
-		animation: fade-in 2s ease-in;
+		animation: fade-in 1s ease-in;
 	}
 
 	.infinite-fog {
@@ -153,7 +155,6 @@
 		transform: translateY(35vh);
 		opacity: 0.5;
 		border-image-slice: 96;
-		animation: fade-in 3s ease-in;
 	}
 
 	.hub-card-container {
