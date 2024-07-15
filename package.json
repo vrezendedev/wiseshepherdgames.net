@@ -26,6 +26,7 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"three": "^0.166.0"
+		"@types/three": "^0.166.0",
+		"three": "^0.166.1"
 	}
 }
