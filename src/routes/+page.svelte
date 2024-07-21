@@ -2,6 +2,7 @@
 	import { fade } from 'svelte/transition';
 	import { linear } from 'svelte/easing';
 	import * as helpers from '$lib/helpers.js';
+	import { WiseShepherdGamesCommons } from '$lib/commons';
 
 	let hubOptions = [
 		{
@@ -33,7 +34,7 @@
 		focused = true;
 		setTimeout(() => {
 			helpers.EffectsHelper.typeEffect(
-				100,
+				75,
 				() => {
 					let path = `/audio_keyboard_` + helpers.RandomHelper.getRandomInt(16, 1) + `.ogg`;
 					helpers.AudioHelper.playAudio(path);
@@ -47,14 +48,6 @@
 				'targetText'
 			);
 		}, 1250);
-	}
-
-	function playHoverSound() {
-		helpers.AudioHelper.playAudio('/audio_hover.ogg', 0.8);
-	}
-
-	function playClickSound() {
-		helpers.AudioHelper.playAudio('/audio_click.ogg', 0.5);
 	}
 </script>
 
@@ -99,12 +92,12 @@
 						role="button"
 						tabindex={0}
 						on:mouseenter={() => {
-							playHoverSound();
+							WiseShepherdGamesCommons.AudioCommons.playHoverSound();
 							currentHover = i;
 						}}
 						on:mouseleave={() => (currentHover = -1)}
 						on:mousedown={() => {
-							playClickSound();
+							WiseShepherdGamesCommons.AudioCommons.playClickSound();
 							helpers.DomHelper.redirect(href);
 						}}
 					>

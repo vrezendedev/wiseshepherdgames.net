@@ -1,10 +1,17 @@
 <script>
 	import { onMount } from 'svelte';
+	import { fade } from 'svelte/transition';
+	import { linear } from 'svelte/easing';
 	import * as THREE from 'three';
+	import PopUp from '$lib/components/PopUp.svelte';
+	import { WiseShepherdGamesCommons } from '$lib/commons';
 	import { ThreeWrapper } from '$lib/wrappers';
 
 	let div;
 	$: div;
+
+	let displayPopUp = false;
+	let upperControlsRef;
 
 	const books = [];
 
@@ -41,6 +48,9 @@
 			60,
 			Math.PI
 		);
+
+		controls.enabled = false;
+		upperControlsRef = controls;
 
 		let pointLightPosition;
 
@@ -87,6 +97,10 @@
 					pointLightPosition,
 					false
 				);
+
+				setTimeout(() => {
+					displayPopUp = true;
+				}, 500);
 			},
 			(xhr) => {},
 			(error) => {}
@@ -103,6 +117,8 @@
 		renderer.setAnimationLoop(
 			ThreeWrapper.renderFunctionSetup(renderer, camera, scene, controls, [
 				() => {
+					if (!controls.enabled) return;
+
 					raycaster.setFromCamera(pointer, camera);
 
 					const intersects = raycaster.intersectObjects(scene.children);
@@ -155,10 +171,59 @@
 </script>
 
 <svelte:window on:pointermove={onPointerMove} />
-<div bind:this={div} id="canvasDiv" class="scene-change-fade-in"></div>
+<div bind:this={div} id="canvas-div" class="scene-change-fade-in">
+	{#if upperControlsRef != undefined && upperControlsRef.enabled == true}
+		<div in:fade={{ easing: linear, delay: 750, duration: 750 }} class="controls">
+			<p>Camera Zoom In/Out: Mouse Wheel | Pinch Open/Close</p>
+			<p>Rotate Camera: Hold Mouse Left-Button and Move | Touch and Hold and Move Finger</p>
+			<p>
+				Move Camera: Hold Left-Shift and Mouse Left-Button and Move | Touch and Hold with Two
+				Fingers and Move
+			</p>
+			<p>
+				Interact: aim at the target with the Mouse Pointer and click Mouse Left-Button | Tap at the
+				target
+			</p>
+		</div>
+	{/if}
+	{#if displayPopUp}
+		<PopUp width={undefined} height={undefined}>
+			<div class="pop-up-content jost-light-300">
+				<div
+					style="display: flex; flex-direction: row; justify-content: center; align-items: center;"
+				>
+					<img draggable="false" src="/books.png" alt="Book" />
+				</div>
+				<div
+					style="display: flex; flex-direction: column; justify-content: center; align-items: left;"
+				>
+					<h1>Disclaimer</h1>
+					<p>For a better experience, try this webpage on a computer.</p>
+					<h1>Quick Tip</h1>
+					<p>Not every element displayed on the scenario is interactable, therefore...</p>
+					<p>
+						Only the <b>BOOKS</b> on the <b>BOOKSHELF</b> are interactable by
+						<b>CLICKING</b> on it.
+					</p>
+					<br />
+					<button
+						on:click={() => {
+							displayPopUp = false;
+							upperControlsRef.enabled = true;
+						}}
+						on:mousedown={() => {
+							WiseShepherdGamesCommons.AudioCommons.playClickSound();
+						}}
+						class="base-hover jost-light-300">Ok!</button
+					>
+				</div>
+			</div>
+		</PopUp>
+	{/if}
+</div>
 
 <style>
-	#canvasDiv {
+	#canvas-div {
 		margin: 0;
 		padding: 0;
 		padding-top: 12px;
@@ -170,5 +235,78 @@
 	#renderer {
 		margin: 0;
 		padding: 0;
+	}
+
+	.pop-up-content {
+		display: flex;
+		flex-direction: row;
+	}
+
+	.pop-up-content p {
+		margin: 0;
+		padding-right: 42px;
+	}
+
+	.pop-up-content img {
+		width: 350px;
+		height: auto;
+	}
+
+	.pop-up-content button {
+		width: 100px;
+		height: 40px;
+		background-color: var(--card-bg-color);
+		color: white;
+		font-size: 24px;
+		align-self: center;
+		opacity: 0.5;
+		border: none;
+		border-radius: 4px;
+	}
+
+	.controls {
+		user-select: none;
+		position: absolute;
+		width: auto;
+		height: auto;
+		margin-left: calc(100% * 0.03);
+		margin-bottom: calc(100% * 0.0125);
+		display: flex;
+		flex-direction: column;
+		align-items: left;
+		bottom: 0;
+		left: 0;
+	}
+
+	.controls p {
+		margin: 0;
+		padding: 0;
+		font-size: 16px;
+	}
+
+	@media (max-width: 600px) {
+		.pop-up-content {
+			flex-direction: column-reverse;
+		}
+
+		.pop-up-content img {
+			width: 200px;
+			height: 200px;
+		}
+
+		.pop-up-content div {
+			justify-content: center;
+			align-items: center;
+			text-align: justify;
+		}
+
+		.pop-up-content p {
+			padding-left: 16px;
+			padding-right: 16px;
+		}
+
+		.controls p {
+			font-size: 12px;
+		}
 	}
 </style>
