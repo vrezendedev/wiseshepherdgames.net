@@ -26,6 +26,18 @@
 	}
 }
 
+@keyframes shake {
+	0% {
+		transform: rotateZ(-10deg);
+	}
+	50% {
+		transform: rotateZ(20deg);
+	}
+	100% {
+		transform: rotateZ(-10deg);
+	}
+}
+
 @keyframes slide {
 	0% {
 		transform: translate3d(0, 0, 0);

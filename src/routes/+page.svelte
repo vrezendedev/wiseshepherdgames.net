@@ -88,7 +88,7 @@
 					/>
 
 					<div
-						class=" base-border base-hover hub-card"
+						class="base-border base-hover hub-card"
 						role="button"
 						tabindex={0}
 						on:mouseenter={() => {
