@@ -122,8 +122,24 @@
 					pointLightPosition = new THREE.Vector3(child.position.x, 5, child.position.z);
 				}
 
+				if (child.name == 'Bookcase') child.material.roughness = 1;
+
 				if (child.name.includes('Book_0')) {
 					child.layers.enable(1);
+
+					ThreeWrapper.addPointLight(
+						scene,
+						'#FF8D5A',
+						4,
+						1.5,
+						0.25,
+						false,
+						false,
+						new THREE.Vector2(256, 256),
+						new THREE.Vector3(child.position.x - 0.15, child.position.y + 0.5, child.position.z),
+						false
+					);
+
 					books.push({
 						obj: child,
 						hovered: false,
