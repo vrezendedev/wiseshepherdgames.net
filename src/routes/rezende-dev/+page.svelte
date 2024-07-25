@@ -135,7 +135,7 @@
 						0.25,
 						false,
 						false,
-						new THREE.Vector2(256, 256),
+						new THREE.Vector2(128, 128),
 						new THREE.Vector3(child.position.x - 0.15, child.position.y + 0.5, child.position.z),
 						false
 					);

@@ -109,3 +109,16 @@ body {
 body p {
 	font-size: 1rem;
 }
+
+body a {
+	opacity: 0.5;
+	font-size: 1rem;
+}
+
+body a:link {
+	color: white;
+}
+
+body a:visited {
+	color: white;
+}

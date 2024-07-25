@@ -10,7 +10,7 @@
 
 	onMount(() => {
 		if (width && height) {
-			popUpContainer.style = `width:${width}px; height:${height}px`;
+			popUpContainer.style = `width:${width}; height:${height}`;
 		}
 	});
 </script>
