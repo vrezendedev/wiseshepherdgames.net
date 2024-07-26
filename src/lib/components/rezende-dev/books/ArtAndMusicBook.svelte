@@ -2,12 +2,11 @@
 	<h1 style="align-self: center;">Art and Music</h1>
 	<p style="text-align: justify;">
 		Since I'm not focusing on an artistic career, I wasn't inclined to create accounts on different
-		websites to display my work. Either way, I like to build simple 3D scenes - like this one.
-		Regarding 2D art, I try some things here and there, but nothing too fancy. Anyway, I really
-		enjoy creating music - I started playing guitar when I was little, stopped after a short time,
-		and later rejoined the music path with a musical keyboard and a banjo. I use Blender for my 3D
-		art, FireAlpaca/Aseprite for 2D art, and FLStudio for my music. If you want to check out my art
-		and music, you can play my games or watch my video uploads on my <a
+		websites to display my work. Either way, I like to build simple 3D scenes and regarding 2D art,
+		I try some things, but nothing too fancy. Anyway, I really enjoy creating music - I started
+		playing guitar when I was little, stopped after a while, and later started with a keyboard and
+		banjo. I use Blender for my 3D art, FireAlpaca/Aseprite for 2D art, and FLStudio for my music.
+		If you want to check out my art and music, you can play my games or watch my video uploads on my <a
 			data-sveltekit-reload
 			rel="external"
 			class="base-hover"
