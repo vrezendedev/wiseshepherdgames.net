@@ -4,6 +4,7 @@
 	import { linear } from 'svelte/easing';
 	import * as THREE from 'three';
 	import PopUp from '$lib/components/PopUp.svelte';
+	import { AudioHelper } from '$lib/helpers';
 	import { WiseShepherdGamesCommons } from '$lib/commons';
 	import { ThreeWrapper } from '$lib/wrappers';
 	import AboutMeBook from '$lib/components/rezende-dev/books/AboutMeBook.svelte';
@@ -62,11 +63,12 @@
 	function onPointerClick(event) {
 		event.preventDefault();
 
-		if (currentHoveredBookIndex != -1) {
+		if (currentHoveredBookIndex != -1 && displayBookContent == false) {
 			document.body.style.cursor = 'default';
 			displayBookContent = true;
 			upperControlsRef.enabled = false;
 			displayBookTitle = false;
+			WiseShepherdGamesCommons.AudioCommons.playClickSound();
 		}
 	}
 
@@ -367,6 +369,7 @@
 						on:click={() => {
 							displayDisclaimerPopUp = false;
 							upperControlsRef.enabled = true;
+							AudioHelper.playAudio('/dungeon_ambience.mp3', 0.025, true);
 						}}
 						on:mousedown={() => {
 							WiseShepherdGamesCommons.AudioCommons.playClickSound();
