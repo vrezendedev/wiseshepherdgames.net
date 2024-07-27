@@ -1,11 +1,11 @@
 <script>
-	import { onMount } from 'svelte';
+	import { onDestroy, onMount } from 'svelte';
 	import { fade } from 'svelte/transition';
 	import { linear } from 'svelte/easing';
 	import * as THREE from 'three';
 	import PopUp from '$lib/components/PopUp.svelte';
-	import { AudioHelper } from '$lib/helpers';
 	import { WiseShepherdGamesCommons } from '$lib/commons';
+	import * as helpers from '$lib/helpers';
 	import { ThreeWrapper } from '$lib/wrappers';
 	import AboutMeBook from '$lib/components/rezende-dev/books/AboutMeBook.svelte';
 	import CurriculumBook from '$lib/components/rezende-dev/books/CurriculumBook.svelte';
@@ -36,6 +36,7 @@
 	const rendererSizeOffset = 0.05;
 	let renderer;
 	let camera;
+	let audio;
 
 	function onPointerMove(event) {
 		event.preventDefault();
@@ -244,6 +245,12 @@
 			])
 		);
 	});
+
+	onDestroy(() => {
+		if (audio) {
+			audio.pause();
+		}
+	});
 </script>
 
 <svelte:window
@@ -274,12 +281,33 @@
 					</div>
 				{/if}
 				<button
-					class="help-button base-hover"
+					class="bottom-buttons base-hover"
+					title="Controls"
 					on:click={() => (displayHelpInfo = !displayHelpInfo)}
 				>
 					<img style="align-self: center;" src="/mark_question_00.png" alt="Help" />
 				</button>
 			</div>
+		</div>
+		<div in:fade={{ easing: linear, delay: 750, duration: 750 }} class="go-to-wise-shepherd-games">
+			<button
+				class="bottom-buttons base-hover"
+				title="Go to Wise Shepherd Games Page!"
+				on:click={() => helpers.DomHelper.redirect('/wise-shepherd-games')}
+			>
+				<img
+					style="align-self: center; border-radius:50%;"
+					src="/favicon.png"
+					alt="Wise Shepherd Games"
+				/>
+			</button>
+			<button
+				class="bottom-buttons base-hover"
+				title="Go to Hub Page!"
+				on:click={() => helpers.DomHelper.redirect('/')}
+			>
+				<img style="align-self: center; border-radius:50%;" src="/home_00.png" alt="Hub" />
+			</button>
 		</div>
 	{/if}
 
@@ -369,7 +397,10 @@
 						on:click={() => {
 							displayDisclaimerPopUp = false;
 							upperControlsRef.enabled = true;
-							AudioHelper.playAudio('/dungeon_ambience.mp3', 0.025, true);
+							audio = new Audio('/dungeon_ambience.mp3');
+							audio.volume = 0.025;
+							audio.play();
+							audio.loop = true;
 						}}
 						on:mousedown={() => {
 							WiseShepherdGamesCommons.AudioCommons.playClickSound();
@@ -424,7 +455,7 @@
 		border-radius: 4px;
 	}
 
-	.help-button {
+	.bottom-buttons {
 		width: 50px;
 		height: 50px;
 		background-color: var(--card-bg-color);
@@ -438,11 +469,11 @@
 		animation: shake 2s infinite;
 	}
 
-	.help-button:hover {
+	.bottom-buttons:hover {
 		animation: none;
 	}
 
-	.help-button img {
+	.bottom-buttons img {
 		width: 50px;
 		height: 50px;
 	}
@@ -459,6 +490,21 @@
 		align-items: left;
 		bottom: 0;
 		left: 0;
+	}
+
+	.go-to-wise-shepherd-games {
+		user-select: none;
+		position: absolute;
+		width: auto;
+		height: auto;
+		margin-right: calc(100% * 0.03);
+		margin-bottom: calc(100% * 0.0125);
+		display: flex;
+		flex-direction: row;
+		gap: 0.5rem;
+		align-items: right;
+		bottom: 0;
+		right: 0;
 	}
 
 	.book-title {
@@ -517,12 +563,12 @@
 			font-size: 12px;
 		}
 
-		.help-button {
+		.bottom-buttons {
 			width: 35px;
 			height: 35px;
 		}
 
-		.help-button img {
+		.bottom-buttons img {
 			width: 35px;
 			height: 35px;
 		}
