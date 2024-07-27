@@ -1,5 +1,6 @@
 <script>
 	import * as helpers from '$lib/helpers';
+	import { viewportBottomRight } from 'three/examples/jsm/nodes/Nodes.js';
 
 	const navbarElements = [
 		{ title: 'HOME', elementID: 'home-div' },
@@ -40,8 +41,11 @@
 				class="base-hover jost-light-300"
 				on:click={() => {
 					let element = document.getElementById(elementID);
-					let pos = element.getBoundingClientRect();
-					window.scrollTo(0, pos.top);
+					element.scrollIntoView({
+						behavior: 'smooth',
+						block: 'end',
+						inline: 'nearest'
+					});
 				}}>{title}</button
 			>
 			{#if i == navbarElements.length / 2 - 1}
@@ -71,8 +75,11 @@
 		</div>
 	</div>
 	<div class="divider" />
-	<div id="about-div" class="content-div jost-light-300">
-		<div style="display: flex; flex-direction: column; justify-content: center; align-items:left;">
+	<div class="content-div jost-light-300">
+		<div
+			id="about-div"
+			style="display: flex; flex-direction: column; justify-content: center; align-items:left;"
+		>
 			<h1>About Us</h1>
 			<p style="text-align: justify;">
 				Wise Shepherd Games is an indie game developer "studio" from Brazil. Founded by Vinicius
