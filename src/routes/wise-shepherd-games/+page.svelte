@@ -1,18 +1,34 @@
 <script>
+	import * as helpers from '$lib/helpers';
+
 	const navbarElements = [
 		{ title: 'HOME', elementID: 'home-div' },
 		{ title: 'ABOUT US', elementID: 'about-div' },
-		{ title: 'GAMES', elementID: '' },
-		{ title: 'CONTACT', elementID: '' }
+		{ title: 'GAMES', elementID: 'games-div' },
+		{ title: 'CONTACT', elementID: 'contact-div' }
 	];
 
 	const team = [
 		{
 			name: 'Vinicius Rezende',
 			img: '/rezende_bw_00.png',
-			title: 'Programmer, designer, artist, sound designer and musician.',
+			roles: 'Programmer, designer, artist, sound designer and musician.',
 			website: '/rezende-dev',
 			pronoum: 'him'
+		}
+	];
+
+	const games = [
+		{
+			title: 'Sandtide',
+			status: 'In Development',
+			date: 'TBA',
+			img: '/games/sandtide_logo_00.png',
+			genres: 'Real Time Strategy | Roguelike | Resource Management',
+			description: `In a very distant future, a new galaxy has been discovered with planets filled with Enud - the most valuable ore in the known universe. 
+                Some commanders from different factions of the Universal Order were chosen to explore and conquer these new planets. 
+                Choose between unique playable commanders, explore randomly generated isometric worlds, build structures, enlist units, produce resources, research new technologies, and try to survive. 
+                Santide is an old-school-like 2D isometric real time strategy and resource management game with a roguelike twist.`
 		}
 	];
 </script>
@@ -25,7 +41,7 @@
 				on:click={() => {
 					let element = document.getElementById(elementID);
 					let pos = element.getBoundingClientRect();
-					window.scrollTo(pos.left, pos.top);
+					window.scrollTo(0, pos.top);
 				}}>{title}</button
 			>
 			{#if i == navbarElements.length / 2 - 1}
@@ -34,7 +50,12 @@
 		{/each}
 	</div>
 	<div id="home-div" class="content-div jost-light-300">
-		<img src="/logo.png" draggable="false" alt="Wise Shepherd Games Logo" />
+		<img
+			style="	align-self: center;"
+			src="/logo.png"
+			draggable="false"
+			alt="Wise Shepherd Games Logo"
+		/>
 		<div style="display: flex; flex-direction: column; justify-content: center; align-items:left;">
 			<h1>Home</h1>
 			<p style="text-align: justify;">
@@ -54,23 +75,26 @@
 		<div style="display: flex; flex-direction: column; justify-content: center; align-items:left;">
 			<h1>About Us</h1>
 			<p style="text-align: justify;">
-				Wise Shepherd Games is an indie game developer from Brazil. Founded by Vinicius Rezende,
-				also known by his nickname, Wise Shepherd. On Wise Shepherd Games, we share a deep passion
-				for unique, fantastical, and complex worlds. Our goal is to create a new universe to explore
-				through different experiences. Heavily inspired by well-known sci-fi and high-fantasy
-				masterpieces, our designs focus on immersion - mechanic-wise and story-wise.
+				Wise Shepherd Games is an indie game developer "studio" from Brazil. Founded by Vinicius
+				Rezende, also known by his nickname, Wise Shepherd. On Wise Shepherd Games, we share a deep
+				passion for unique, fantastical, and complex worlds. Our goal is to create a new universe to
+				explore through different experiences. Heavily inspired by well-known sci-fi and
+				high-fantasy masterpieces, our designs focus on immersion - mechanic-wise and story-wise.
 			</p>
-			<p style="text-align: right; font-weight: bold;">Meet our team:</p>
+			<p style="font-weight: bold;">Meet our team:</p>
 			{#each team as member}
-				<div style="display: flex; flex-direction: row; gap: 1rem; margin-bottom: 10px;">
+				<div style="display: flex; flex-direction: row-reverse; gap: 1rem; margin-bottom: 10px;">
 					<img
 						style="width: 125px; height: 125px; border-radius:50%"
+						draggable="false"
 						src={member.img}
 						alt="Member"
 					/>
-					<div style="display: flex; flex-direction: column; justify-content: center;">
+					<div
+						style="display: flex; flex-direction: column; justify-content: center; text-align: right;"
+					>
 						<p><b>{member.name}</b></p>
-						<p style="margin-top: 0;">{member.title}</p>
+						<p style="margin-top: 0;">{member.roles}</p>
 						<a href={member.website} class="base-hover" style="opacity: 0.5; color:white;"
 							>Know more about {member.pronoum}</a
 						>
@@ -80,6 +104,68 @@
 		</div>
 	</div>
 	<div class="divider" />
+	<div id="games-div" class="content-div jost-light-300">
+		<div style="display: flex; flex-direction: column; justify-content: center; align-items:left;">
+			<h1>Games</h1>
+			{#each games as game}
+				<div class="games-div-game-info">
+					<img
+						style="width: 250px; height: 250px; margin-bottom: 0;"
+						draggable="false"
+						src={game.img}
+						alt="Member"
+					/>
+					<div
+						style="display: flex; flex-direction: column; justify-content: center; align-items: left;"
+					>
+						<h3 style="margin-bottom: 0;">{game.title}</h3>
+						<p style="margin-top: 0; margin-bottom: 0;">Status: {game.status}</p>
+						<p style="margin-top: 0; margin-bottom: 0;">Release Date: {game.date}</p>
+						<p style="margin-top: 0;">Genres: {game.genres}</p>
+						<p style="text-align: justify;">{game.description}</p>
+					</div>
+				</div>
+			{/each}
+		</div>
+	</div>
+	<div class="divider" />
+	<div id="contact-div" class="content-div jost-light-300">
+		<div style="display: flex; flex-direction: column; justify-content: center; align-items:left;">
+			<h1>Contact</h1>
+			<p style="text-align: justify;">
+				Our official means of communication are through our e-mail, <em
+					>contact@wiseshepherdgames.net</em
+				>, and our Discord Channel, which you can join by clicking on the Discord icon below. Also,
+				a lot of content related to our game's development is shared on Rezende's YouTube channel,
+				which you can access by clicking on the YouTube icon below.
+			</p>
+			<br />
+			<div style="display: flex; justify-content: center; align-items:center; gap: 2rem;">
+				<button
+					title="Redirect to discord's channel invite page."
+					class="contact-buttons base-hover"
+					on:click={() => {
+						helpers.DomHelper.redirect('https://discord.gg/KbtsJ5jXQH');
+					}}
+				>
+					<img src="discord_logo.png" alt="Discord Logo" />
+				</button>
+				<button
+					title="Redirect to Rezende's YouTube channel."
+					class="contact-buttons base-hover"
+					on:click={() => {
+						helpers.DomHelper.redirect('https://www.youtube.com/@wsvrez');
+					}}
+				>
+					<img src="youtube_logo.png" alt="Youtube Logo" />
+				</button>
+			</div>
+			<br />
+			<p style="text-align: center; font-size: 0.75rem; margin-bottom: 0;">
+				© WISE SHEPHERD GAMES. ALL RIGHTS RESERVED.
+			</p>
+		</div>
+	</div>
 </div>
 
 <style>
@@ -148,9 +234,44 @@
 		border-radius: 10px;
 	}
 
+	.games-div-game-info {
+		display: flex;
+		flex-direction: row;
+		gap: 1rem;
+	}
+
+	.games-div-game-info img {
+		align-self: center;
+	}
+
+	.contact-buttons {
+		background-color: white;
+		width: 50px;
+		height: 50px;
+		opacity: 0.5;
+		border: none;
+		border-radius: 50%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.contact-buttons img {
+		width: 50px;
+		height: 50px;
+	}
+
 	@media (max-width: 1440px) {
 		.contents {
 			padding-top: 8%;
+		}
+	}
+
+	@media (max-width: 1024px) {
+		.games-div-game-info {
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
 		}
 	}
 
