@@ -102,8 +102,10 @@
 					>
 						<p><b>{member.name}</b></p>
 						<p style="margin-top: 0;">{member.roles}</p>
-						<a href={member.website} class="base-hover" style="opacity: 0.5; color:white;"
-							>Know more about {member.pronoum}</a
+						<a
+							href={member.website}
+							class="base-hover"
+							style="opacity: 0.5; color:white; z-index: -5">Know more about {member.pronoum}</a
 						>
 					</div>
 				</div>
@@ -307,6 +309,11 @@
 		.content-div img {
 			width: 150px;
 			height: 150px;
+		}
+
+		.contact-buttons img {
+			width: 50px;
+			height: 50px;
 		}
 
 		.content-div {
