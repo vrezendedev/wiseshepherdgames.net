@@ -285,7 +285,12 @@
 					title="Controls"
 					on:click={() => (displayHelpInfo = !displayHelpInfo)}
 				>
-					<img style="align-self: center;" src="/mark_question_00.png" alt="Help" />
+					<img
+						draggable="false"
+						style="align-self: center;"
+						src="/mark_question_00.png"
+						alt="Help"
+					/>
 				</button>
 			</div>
 		</div>
@@ -296,6 +301,7 @@
 				on:click={() => helpers.DomHelper.redirect('/wise-shepherd-games')}
 			>
 				<img
+					draggable="false"
 					style="align-self: center; border-radius:50%;"
 					src="/favicon.png"
 					alt="Wise Shepherd Games"
@@ -306,7 +312,12 @@
 				title="Go to Hub Page!"
 				on:click={() => helpers.DomHelper.redirect('/')}
 			>
-				<img style="align-self: center; border-radius:50%;" src="/home_00.png" alt="Hub" />
+				<img
+					draggable="false"
+					style="align-self: center; border-radius:50%;"
+					src="/home_00.png"
+					alt="Hub"
+				/>
 			</button>
 		</div>
 	{/if}

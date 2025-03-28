@@ -1,6 +1,7 @@
 <script>
 	import * as helpers from '$lib/helpers';
-	import { viewportBottomRight } from 'three/examples/jsm/nodes/Nodes.js';
+	import { fade } from 'svelte/transition';
+	import { linear, quadInOut } from 'svelte/easing';
 
 	const navbarElements = [
 		{ title: 'HOME', elementID: 'home-div' },
@@ -14,7 +15,7 @@
 			name: 'Vinicius Rezende',
 			img: '/rezende_bw_00.png',
 			roles: 'Programmer, designer, artist, sound designer and musician.',
-			website: '/rezende-dev',
+			website: { external: false, url: '/rezende-dev' },
 			pronoum: 'him'
 		}
 	];
@@ -24,12 +25,16 @@
 			title: 'Sandtide',
 			status: 'In Development',
 			date: 'TBA',
+			platform: 'PC',
 			img: '/games/sandtide_logo_00.png',
-			genres: 'Real Time Strategy | Roguelike | Resource Management',
-			description: `In a very distant future, a new galaxy has been discovered with planets filled with Enud - the most valuable ore in the known universe. 
-                Some commanders from different factions of the Universal Order were chosen to explore and conquer these new planets. 
-                Choose between unique playable commanders, explore randomly generated isometric worlds, build structures, enlist units, produce resources, research new technologies, and try to survive. 
-                Santide is an old-school-like 2D isometric real time strategy and resource management game with a roguelike twist.`
+			genres: 'Real Time Strategy | Roguelike | Management',
+			description: `In the distant future, a new galaxy has been discovered, filled with floating islands containing Enud — the most valuable ore in the known universe. 
+				Commanders from various factions of the Universal Order have been chosen to explore these newly discovered lands. 
+				Choose between unique playable factions, explore randomly generated isometric worlds, build structures, recruit units, produce resources, research new technologies, and strive to survive. 
+				<br/>
+				<br/>
+				Sandtide is an old-school-like 2D isometric real-time strategy and management game with a roguelike twist.
+			`
 		}
 	];
 </script>
@@ -102,10 +107,11 @@
 					>
 						<p><b>{member.name}</b></p>
 						<p style="margin-top: 0;">{member.roles}</p>
-						<a
-							href={member.website}
+						<button
+							data-sveltekit-reload
+							on:click={() => helpers.DomHelper.redirect(member.website.url) }
 							class="base-hover"
-							style="opacity: 0.5; color:white; z-index: -5">Know more about {member.pronoum}</a
+							style="background-color: transparent; border: none; opacity: 0.5; color:white; z-index: 1; text-align: right;">Know more about {member.pronoum}</button
 						>
 					</div>
 				</div>
@@ -130,8 +136,13 @@
 						<h3 style="margin-bottom: 0;">{game.title}</h3>
 						<p style="margin-top: 0; margin-bottom: 0;">Status: {game.status}</p>
 						<p style="margin-top: 0; margin-bottom: 0;">Release Date: {game.date}</p>
+						<p style="margin-top: 0; margin-bottom: 0;">Platform: {game.platform}</p>
 						<p style="margin-top: 0;">Genres: {game.genres}</p>
-						<p style="text-align: justify;">{game.description}</p>
+						<p
+							style="text-align: justify;"
+							contenteditable="true"
+							bind:innerHTML={game.description}
+						></p>
 					</div>
 				</div>
 			{/each}
@@ -175,6 +186,20 @@
 			</p>
 		</div>
 	</div>
+
+	<button
+		in:fade={{ easing: linear, delay: 250, duration: 750 }}
+		class="ws-bottom-buttons base-hover"
+		title="Go to Hub Page!"
+		on:click={() => helpers.DomHelper.redirect('/')}
+	>
+		<img
+			draggable="false"
+			style="align-self: center; border-radius:50%;"
+			src="/home_00.png"
+			alt="Hub"
+		/>
+	</button>
 </div>
 
 <style>
@@ -266,6 +291,31 @@
 	}
 
 	.contact-buttons img {
+		width: 50px;
+		height: 50px;
+	}
+
+	.ws-bottom-buttons {
+		position: fixed;
+		left: 16px;
+		bottom: 16px;
+		width: 50px;
+		height: 50px;
+		background-color: var(--card-bg-color);
+		opacity: 0.5;
+		border: none;
+		border-radius: 60px;
+		align-self: flex-start;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.ws-bottom-buttons :hover {
+		animation: none;
+	}
+
+	.ws-bottom-buttons img {
 		width: 50px;
 		height: 50px;
 	}
