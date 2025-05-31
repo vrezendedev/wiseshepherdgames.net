@@ -298,25 +298,13 @@
 			<button
 				class="bottom-buttons base-hover"
 				title="Go to Wise Shepherd Games Page!"
-				on:click={() => helpers.DomHelper.redirect('/wise-shepherd-games')}
+				on:click={() => helpers.DomHelper.redirect('/')}
 			>
 				<img
 					draggable="false"
 					style="align-self: center; border-radius:50%;"
 					src="/favicon.png"
 					alt="Wise Shepherd Games"
-				/>
-			</button>
-			<button
-				class="bottom-buttons base-hover"
-				title="Go to Hub Page!"
-				on:click={() => helpers.DomHelper.redirect('/')}
-			>
-				<img
-					draggable="false"
-					style="align-self: center; border-radius:50%;"
-					src="/home_00.png"
-					alt="Hub"
 				/>
 			</button>
 		</div>
@@ -403,13 +391,14 @@
 						Only the <b>BOOKS</b> on the <b>BOOKSHELF</b> are interactable by
 						<b>CLICKING</b> on it.
 					</p>
-					<br />
+
 					<button
+						style="margin-top: 24px;"
 						on:click={() => {
 							displayDisclaimerPopUp = false;
 							upperControlsRef.enabled = true;
 							audio = new Audio('/dungeon_ambience.mp3');
-							audio.volume = 0.025;
+							audio.volume = 0.2;
 							audio.play();
 							audio.loop = true;
 						}}

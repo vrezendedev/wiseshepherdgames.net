@@ -5,5 +5,5 @@ export function playHoverSound() {
 }
 
 export function playClickSound() {
-	helpers.AudioHelper.playAudio('/audio_click.ogg', 0.5);
+	helpers.AudioHelper.playAudio('/audio_click.ogg', 0.3);
 }

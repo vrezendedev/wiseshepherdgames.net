@@ -9,7 +9,7 @@
 		My favorite framework is MonoGame. With it, I have access to a robust library and total control
 		of my software architecture. My published games are under the name of <a
 			class="base-hover"
-			href="/wise-shepherd-games"
+			href="/"
 		>
 			Wise Shepherd Games
 		</a>
